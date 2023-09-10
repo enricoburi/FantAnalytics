@@ -342,7 +342,7 @@ def main():
                         with dx1:
                             st.markdown(f"### Assoluta:")
                             acc_sign = accuracy_sign(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"], subset["Fantavoto Media"])
-                            st.markdown(f"# :blue[{round(acc_sign*100, 2)}%"])
+                            st.markdown(f"# :blue[{round(acc_sign*100, 2)}%]")
                         with dx2:
                             if slider_soglia_errore > 0:
                                 st.markdown(f"### Solo Errori >= {slider_soglia_errore}:")
