@@ -318,15 +318,15 @@ def main():
                     with sx1:
                         st.markdown("### Medio:")
                         mae = mean_absolute_error(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"])
-                        st.markdown(f"## {round(mae, 2)}")
+                        st.markdown(f"# :red[{round(mae, 2)}]")
                     with sx2:
                         st.markdown("### Medio %:")
                         mape = mean_absolute_percentage_error(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"])
-                        st.markdown(f"# {round(mape*100, 2)}%")
+                        st.markdown(f"# :red[{round(mape*100, 2)}%]")
                     with sx3:
                         st.markdown("### Massimo:")
                         max_error = subset["Errore Predizione"].max()
-                        st.markdown(f"# {round(max_error, 2)}")
+                        st.markdown(f"# :red[{round(max_error, 2)}]")
                 with dx:
                     st.subheader(":chart_with_upwards_trend: Accuratezza del Trend Previsto")
                     with st.expander("Dettagli"):
@@ -342,12 +342,12 @@ def main():
                         with dx1:
                             st.markdown(f"### Assoluta:")
                             acc_sign = accuracy_sign(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"], subset["Fantavoto Media"])
-                            st.markdown(f"# {round(acc_sign*100, 2)}%")
+                            st.markdown(f"# :blue[{round(acc_sign*100, 2)}%"])
                         with dx2:
                             if slider_soglia_errore > 0:
                                 st.markdown(f"### Solo Errori >= {slider_soglia_errore}:")
                                 acc_sign_given_error = accuracy_sign(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"], subset["Fantavoto Media"], given_threshold=slider_soglia_errore, absolute_error=True)
-                                st.markdown(f"# {round(acc_sign_given_error*100, 2)}%")
+                                st.markdown(f"# :blue[{round(acc_sign_given_error*100, 2)}%]")
                             else:
                                 pass
                     else:
