@@ -13,7 +13,7 @@ def setup():
 
   setup()
 
-df = pd.read_csv("Predizioni/2022-23.csv", index_col=0)
+df = pd.read_csv("./Predizioni/2022-23.csv", index_col=0)
 
 ################################################################################
 
