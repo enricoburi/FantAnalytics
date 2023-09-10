@@ -314,24 +314,19 @@ def main():
                 sx, dx = st.columns(2)
                 with sx:
                     st.subheader(":dart: Errore Assoluto")
-                    sx1, sx2 = st.columns(2)
+                    sx1, sx2, sx3 = st.columns(3)
                     with sx1:
                         st.markdown("### Medio:")
-                    with sx2:
                         mae = mean_absolute_error(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"])
-                        st.markdown(f"### {round(mae, 2)}")
-                    sx1, sx2 = st.columns(2)
-                    with sx1:
+                        st.markdown(f"## {round(mae, 2)}")
+                    with sx2:
                         st.markdown("### Medio %:")
-                    with sx2:
                         mape = mean_absolute_percentage_error(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"])
-                        st.markdown(f"### {round(mape*100, 2)}%")
-                    sx1, sx2 = st.columns(2)
-                    with sx1:
+                        st.markdown(f"# {round(mape*100, 2)}%")
+                    with sx3:
                         st.markdown("### Massimo:")
-                    with sx2:
                         max_error = subset["Errore Predizione"].max()
-                        st.markdown(f"### {round(max_error, 2)}")
+                        st.markdown(f"# {round(max_error, 2)}")
                 with dx:
                     st.subheader(":chart_with_upwards_trend: Accuratezza del Trend Previsto")
                     with st.expander("Dettagli"):
@@ -346,15 +341,15 @@ def main():
                         dx1, dx2 = st.columns(2)
                         with dx1:
                             st.markdown(f"### Assoluta:")
-                        with dx2:
                             acc_sign = accuracy_sign(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"], subset["Fantavoto Media"])
-                            st.markdown(f"### {round(acc_sign*100, 2)}%")
-                        dx1, dx2 = st.columns(2)
-                        with dx1:
-                            st.markdown(f"### Solo Predizioni con Errore >= {slider_soglia_errore}:")
+                            st.markdown(f"# {round(acc_sign*100, 2)}%")
                         with dx2:
-                            acc_sign_given_error = accuracy_sign(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"], subset["Fantavoto Media"], given_threshold=slider_soglia_errore, absolute_error=True)
-                            st.markdown(f"### {round(acc_sign_given_error*100, 2)}%")
+                            if slider_soglia_errore > 0:
+                                st.markdown(f"### Solo Errori >= {slider_soglia_errore}:")
+                                acc_sign_given_error = accuracy_sign(subset["Fantavoto Media Reale Anno Successivo"], subset["Fantavoto Media Predetta Anno Successivo"], subset["Fantavoto Media"], given_threshold=slider_soglia_errore, absolute_error=True)
+                                st.markdown(f"# {round(acc_sign_given_error*100, 2)}%")
+                            else:
+                                pass
                     else:
                         st.markdown("Non applicabile per giocatori senza Presenze Anno Precedente")
         
